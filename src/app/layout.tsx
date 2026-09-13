@@ -40,7 +40,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    /* suppressHydrationWarning: the inline script below stamps class="js" on
+       this element before React hydrates, so server and client markup differ
+       here by design. It is scoped to this one element only. */
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Marks the document as scripted before first paint, so the reveal
+            styles only ever hide content that JavaScript can reveal again. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
+      </head>
       <body className="bg-[#F5F1E8] text-[#171717] antialiased selection:bg-[#B85C3A] selection:text-white">
         <SmoothScroll>{children}</SmoothScroll>
       </body>

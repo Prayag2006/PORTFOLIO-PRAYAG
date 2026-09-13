@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
+import { Reveal } from "@/components/Reveal";
 
 interface Project {
   id: string;
@@ -55,7 +56,8 @@ export const SelectedProjects: React.FC = () => {
     >
       <div className="mx-auto max-w-[1360px]">
         {/* Section Header Row */}
-        <div className="grid grid-cols-1 items-end gap-6 border-b-2 border-[#171717] pb-10 md:grid-cols-12">
+        <Reveal>
+          <div className="grid grid-cols-1 items-end gap-6 border-b-2 border-[#171717] pb-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <SectionHeading lead="Selected" accent="Projects" />
           </div>
@@ -75,17 +77,18 @@ export const SelectedProjects: React.FC = () => {
               <span>View all projects</span>
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
+            </div>
           </div>
-        </div>
+        </Reveal>
 
         {/* Project Grid */}
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 pt-12 sm:grid-cols-2 lg:grid-cols-4">
-          {projects.map((project) => (
-            <a
-              key={project.id}
-              href={project.link}
-              className="project-card group flex flex-col text-left"
-            >
+          {projects.map((project, index) => (
+            <Reveal key={project.id} delay={index} className="h-full">
+              <a
+                href={project.link}
+                className="project-card group flex h-full flex-col text-left"
+              >
               {/* Hard-bordered image block with a solid offset that collapses on hover */}
               <div className="brutal-block brutal-lift relative aspect-[4/3] w-full overflow-hidden bg-[#EBE5D8]">
                 <Image
@@ -113,7 +116,8 @@ export const SelectedProjects: React.FC = () => {
                   </p>
                 </div>
               </div>
-            </a>
+              </a>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Mail, Globe, MapPin } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
 
 export const ContactCTA: React.FC = () => {
   return (
@@ -10,7 +11,8 @@ export const ContactCTA: React.FC = () => {
     >
       <div className="mx-auto grid max-w-[1360px] grid-cols-1 items-center gap-12 lg:grid-cols-12">
         {/* Headline */}
-        <div className="flex flex-col space-y-5 lg:col-span-6">
+        <Reveal className="lg:col-span-6">
+          <div className="flex flex-col space-y-5">
           <h2 className="font-display uppercase leading-[0.82] tracking-tight text-[clamp(2.75rem,7vw,5.5rem)]">
             <span className="block">Let&apos;s create</span>
             <span className="block text-[#B85C3A]">something great</span>
@@ -20,10 +22,12 @@ export const ContactCTA: React.FC = () => {
             Have a project in mind? Let&apos;s build something that makes an
             impact and elevates your brand online.
           </p>
-        </div>
+          </div>
+        </Reveal>
 
         {/* QR block */}
-        <div className="flex flex-col items-center justify-center gap-4 border-[#55504A] py-6 sm:flex-row lg:col-span-3 lg:border-x-2 lg:py-0 lg:px-4">
+        <Reveal className="lg:col-span-3" delay={1}>
+          <div className="flex flex-col items-center justify-center gap-4 border-[#55504A] py-6 sm:flex-row lg:border-x-2 lg:py-0 lg:px-4">
           <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center border-2 border-[#F5F1E8] bg-[#F5F1E8] p-2">
             <svg
               viewBox="0 0 100 100"
@@ -62,10 +66,12 @@ export const ContactCTA: React.FC = () => {
               ⤵
             </span>
           </div>
-        </div>
+          </div>
+        </Reveal>
 
         {/* Contact details */}
-        <div className="flex flex-col space-y-3 lg:col-span-3">
+        <Reveal className="lg:col-span-3" delay={2}>
+          <div className="flex flex-col space-y-3">
           <a
             href="mailto:hello@prayagkansara.design"
             className="group flex items-center gap-3 border-2 border-[#55504A] px-4 py-3 transition-colors duration-300 hover:border-[#B85C3A] hover:bg-[#B85C3A]"
@@ -90,7 +96,8 @@ export const ContactCTA: React.FC = () => {
               Remote Worldwide
             </span>
           </div>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

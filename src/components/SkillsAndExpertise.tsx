@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout, Code, Smartphone, Zap } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
+import { Reveal } from "@/components/Reveal";
 
 interface Skill {
   name: string;
@@ -47,13 +48,16 @@ export const SkillsAndExpertise: React.FC = () => {
   return (
     <section className="w-full border-b-2 border-[#171717] bg-[#F1EDE3] px-6 py-16 md:px-12 md:py-24 lg:px-16">
       <div className="mx-auto max-w-[1360px]">
-        <div className="border-b-2 border-[#171717] pb-10">
-          <SectionHeading lead="Skills &" accent="Expertise" />
-        </div>
+        <Reveal>
+          <div className="border-b-2 border-[#171717] pb-10">
+            <SectionHeading lead="Skills &" accent="Expertise" />
+          </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 items-start gap-12 pt-12 lg:grid-cols-12">
           {/* Skill meters */}
-          <div className="flex flex-col space-y-5 lg:col-span-4">
+          <Reveal className="lg:col-span-4">
+            <div className="flex flex-col space-y-5">
             {skillsList.map((skill) => (
               <div key={skill.name} className="flex flex-col space-y-2">
                 <div className="flex items-baseline justify-between text-[#171717]">
@@ -81,11 +85,13 @@ export const SkillsAndExpertise: React.FC = () => {
                   />
                 </div>
               </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Reveal>
 
           {/* Pull quote */}
-          <div className="relative flex flex-col justify-center border-l-0 border-t-2 border-[#171717] py-8 lg:col-span-4 lg:border-l-4 lg:border-t-0 lg:py-0 lg:pl-8">
+          <Reveal className="lg:col-span-4" delay={1}>
+            <div className="relative flex h-full flex-col justify-center border-l-0 border-t-2 border-[#171717] py-8 lg:border-l-4 lg:border-t-0 lg:py-0 lg:pl-8">
             <span
               aria-hidden="true"
               className="pointer-events-none absolute -top-6 left-0 select-none font-serif text-[9rem] leading-none text-[#B85C3A]/20 lg:left-6"
@@ -97,10 +103,12 @@ export const SkillsAndExpertise: React.FC = () => {
               &ldquo;I design and build digital experiences that are not only
               beautiful but also functional, intuitive, and impactful.&rdquo;
             </blockquote>
-          </div>
+            </div>
+          </Reveal>
 
           {/* Capability blocks */}
-          <div className="flex flex-col space-y-5 lg:col-span-4">
+          <Reveal className="lg:col-span-4" delay={2}>
+            <div className="flex flex-col space-y-5">
             {featuresList.map((feature) => {
               const IconComponent = feature.icon;
               return (
@@ -123,8 +131,9 @@ export const SkillsAndExpertise: React.FC = () => {
                   </div>
                 </div>
               );
-            })}
-          </div>
+              })}
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

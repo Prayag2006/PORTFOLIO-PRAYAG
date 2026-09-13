@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
+import { Reveal } from "@/components/Reveal";
 
 interface Testimonial {
   id: string;
@@ -46,7 +47,8 @@ export const Testimonials: React.FC = () => {
     >
       <div className="mx-auto max-w-[1360px]">
         {/* Section Header Row */}
-        <div className="grid grid-cols-1 items-end gap-6 border-b-2 border-[#171717] pb-10 md:grid-cols-12">
+        <Reveal>
+          <div className="grid grid-cols-1 items-end gap-6 border-b-2 border-[#171717] pb-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <SectionHeading lead="What Clients" accent="Say" />
           </div>
@@ -66,16 +68,15 @@ export const Testimonials: React.FC = () => {
               <span>More reviews</span>
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
+            </div>
           </div>
-        </div>
+        </Reveal>
 
         {/* Testimonial Cards */}
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 pt-12 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <figure
-              key={t.id}
-              className="brutal-block flex flex-col justify-between bg-[#F5F1E8] p-7"
-            >
+          {testimonials.map((t, index) => (
+            <Reveal key={t.id} delay={index} className="h-full">
+              <figure className="brutal-block flex h-full flex-col justify-between bg-[#F5F1E8] p-7">
               <div className="flex flex-col space-y-4">
                 <span
                   aria-hidden="true"
@@ -109,7 +110,8 @@ export const Testimonials: React.FC = () => {
                   </span>
                 </div>
               </figcaption>
-            </figure>
+              </figure>
+            </Reveal>
           ))}
         </div>
       </div>
