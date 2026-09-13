@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { Hero3D } from "@/components/hero/Hero3D";
 
 export const Hero: React.FC = () => {
   return (
@@ -44,9 +45,9 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* Right Column: Burnt-Orange Circle + Portrait Photo + Circular Badge */}
-        <div className="lg:col-span-6 relative flex justify-center lg:justify-end items-end min-h-[380px] sm:min-h-[460px]">
-          {/* Burnt-Orange Backdrop Circle */}
-          <div className="absolute right-4 sm:right-12 bottom-0 w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] md:w-[420px] md:h-[420px] rounded-full bg-[#B85C3A] z-0 shadow-sm" />
+        <div className="lg:col-span-6 relative flex justify-center lg:justify-end items-end min-h-[380px] sm:min-h-[460px] lg:min-h-[540px]">
+          {/* 3D monolith cluster; falls back to a flat circle on mobile/reduced-motion */}
+          <Hero3D />
 
           {/* User Portrait Container */}
           <div className="relative z-10 w-[260px] h-[340px] sm:w-[340px] sm:h-[440px] md:w-[370px] md:h-[470px] rounded-t-full overflow-hidden border-b-0 border-[#C9C2B7] shadow-xl">
