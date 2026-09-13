@@ -46,6 +46,8 @@ Rules:
 - Circles are part of the language — the hero disc, the badge, avatars,
   capability markers.
 - Exactly one accent colour per viewport. Orange is a highlight, never a wash.
+- The contact section is the page's single inversion: solid ink ground, cream
+  text, hairline rules re-toned to `#3A3735`. Keep orange off small text there.
 - Motion is quiet: `cubic-bezier(0.16, 1, 0.3, 1)`, 300-700ms.
 - Scroll reveals go through `<Reveal>`; stagger siblings with `delay={index}`.
 
