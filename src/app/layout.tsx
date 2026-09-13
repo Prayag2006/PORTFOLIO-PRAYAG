@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { IntroOverlay } from "@/components/IntroOverlay";
 
 export const metadata: Metadata = {
   title: "Prayag Kansara — Web Designer & Full-Stack Developer",
@@ -49,11 +50,14 @@ export default function RootLayout({
             styles only ever hide content that JavaScript can reveal again. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
+            __html:
+              "document.documentElement.classList.add('js');" +
+              "try{if(!sessionStorage.getItem('intro-seen')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('intro-pending')}}catch(e){}",
           }}
         />
       </head>
       <body className="bg-[#F5F1E8] text-[#171717] antialiased selection:bg-[#B85C3A] selection:text-white">
+        <IntroOverlay />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

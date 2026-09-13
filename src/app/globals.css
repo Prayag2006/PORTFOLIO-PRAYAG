@@ -87,6 +87,29 @@ html.lenis body {
   outline-offset: 3px;
 }
 
+/* Intro Overlay
+   The shell is server-rendered and hidden by default; a pre-paint script in
+   the layout adds html.intro-pending only when the intro should actually run.
+   That way first-time visitors never glimpse the page first, and returning
+   visitors never glimpse the overlay. */
+.intro-overlay {
+  display: none;
+}
+
+html.intro-pending .intro-overlay {
+  display: flex;
+}
+
+html.intro-pending body {
+  overflow: hidden;
+}
+
+.intro-overlay[data-state="closing"] {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+}
+
 /* Hero Entrance
    Measured: the H1 wordmark is the LCP element (152ms), and above 1024px the
    portrait is larger still, so it becomes the candidate there. An element at
@@ -159,6 +182,13 @@ html.lenis body {
    wrapper) — animating transform there would clobber their positioning. */
 .enter-opacity {
   animation-name: enterOpacity;
+}
+
+html.intro-pending .enter-rise,
+html.intro-pending .enter-fade,
+html.intro-pending .enter-disc,
+html.intro-pending .enter-opacity {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
