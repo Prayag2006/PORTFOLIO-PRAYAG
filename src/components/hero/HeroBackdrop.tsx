@@ -8,28 +8,33 @@ import { useMediaQuery, useMounted, usePrefersReducedMotion } from "@/lib/hooks"
 const MonolithScene = dynamic(() => import("./MonolithScene"), { ssr: false });
 
 /*
- * The scene is gated on `lg`, not `md`: below 1024px the hero is a single
- * stacked column, so a canvas anchored beside the portrait has nowhere to sit.
- * Tablets and phones get the flat block and never download three.js.
+ * Below this the hero stacks into one column, so the canvas has nowhere to
+ * sit. Phones and tablets never download three.js.
  */
 const DESKTOP = "(min-width: 1024px)";
 
-/** Solid offset block — a circle would fight the portrait's hard square frame. */
-function FlatBackdrop() {
-  return (
-    <div className="absolute bottom-0 right-6 h-[300px] w-[210px] bg-[#B85C3A] sm:right-16 sm:h-[380px] sm:w-[270px]" />
-  );
-}
+export type BackdropVariant = "circle" | "sculpture";
 
-export const Hero3D: React.FC = () => {
+/**
+ * What sits behind the cut-out portrait.
+ *
+ * "circle"    — the flat burnt-orange disc from the reference layout.
+ * "sculpture" — the animated 3D monolith cluster (cursor + scroll reactive).
+ *
+ * Both fill the same box, so switching the variant in Hero.tsx is a one-word
+ * change with no layout retuning.
+ */
+export const HeroBackdrop: React.FC<{ variant?: BackdropVariant }> = ({
+  variant = "circle",
+}) => {
   const mounted = useMounted();
   const isDesktop = useMediaQuery(DESKTOP);
   const prefersReducedMotion = usePrefersReducedMotion();
   const [inView, setInView] = useState(true);
   const wrapper = useRef<HTMLDivElement>(null);
 
-  /* Stop rendering once the hero scrolls away — saves battery on long pages. */
   useEffect(() => {
+    if (variant !== "sculpture") return;
     const el = wrapper.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -38,22 +43,22 @@ export const Hero3D: React.FC = () => {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [variant]);
 
-  /* `mounted` keeps the server render and first client render identical. */
-  const showScene = mounted && isDesktop;
+  const showScene = variant === "sculpture" && mounted && isDesktop;
 
   return (
     <div
       ref={wrapper}
-      /* Decorative: pointer-events-none keeps the portrait and badge clickable. */
-      className="pointer-events-none absolute inset-0 z-0 lg:-bottom-6 lg:left-auto lg:right-2 lg:top-auto lg:h-[580px] lg:w-[680px]"
+      className="pointer-events-none absolute inset-0"
       aria-hidden="true"
     >
       {showScene ? (
         <MonolithScene animate={!prefersReducedMotion && inView} />
       ) : (
-        <FlatBackdrop />
+        /* Disc sized and placed so the figure's torso covers its right half,
+           exactly as the reference crops it. */
+        <div className="absolute left-1/2 top-[16%] aspect-square w-[76%] -translate-x-[58%] rounded-full bg-[#B85C3A]" />
       )}
     </div>
   );
