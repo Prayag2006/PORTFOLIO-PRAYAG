@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-display: 'Bebas Neue', 'Oswald', sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-signature: 'Caveat', cursive;
+
+  --bg-warm: #F5F1E8;
+  --bg-warm-alt: #F1EDE3;
+  --text-main: #171717;
+  --text-muted: #55504A;
+  --burnt-orange: #B85C3A;
+  --burnt-orange-dark: #8F4029;
+  --warm-border: #C9C2B7;
+}
+
+body {
+  background-color: var(--bg-warm);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Vertical Text Utilities */
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* Circular Text Badge Animation */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-warm);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--warm-border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--burnt-orange);
+}
+
+/* Selection Color */
+::selection {
+  background-color: var(--burnt-orange);
+  color: #ffffff;
+}
+
+/* Editorial Horizontal Line */
+.divider-line {
+  border-top: 1px solid var(--warm-border);
+}
+
+.divider-right {
+  border-right: 1px solid var(--warm-border);
+}
+
+.divider-bottom {
+  border-bottom: 1px solid var(--warm-border);
+}
+
+/* Project Image Hover Zoom */
+.project-card-image {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-card-image {
+  transform: scale(1.05);
+}
+
+.project-card-title {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.project-card:hover .project-card-title {
+  color: var(--burnt-orange);
+  transform: translateX(4px);
+}

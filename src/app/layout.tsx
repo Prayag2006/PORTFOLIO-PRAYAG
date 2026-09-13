@@ -1,0 +1,48 @@
+import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "Prayag Kansara — Web Designer & Full-Stack Developer",
+  description:
+    "Editorial portfolio of Prayag Kansara, a Web Designer & Full-Stack Developer crafting clean, modern digital experiences, thoughtful interactions, and reliable technology.",
+  keywords: [
+    "Prayag Kansara",
+    "Web Designer",
+    "Full-Stack Developer",
+    "Portfolio",
+    "UI/UX Design",
+    "Digital Creative",
+    "React",
+    "Next.js",
+  ],
+  authors: [{ name: "Prayag Kansara" }],
+  openGraph: {
+    title: "Prayag Kansara — Web Designer & Full-Stack Developer",
+    description:
+      "Crafting clean, modern digital experiences that combine strong visual design, thoughtful interaction, and reliable technology.",
+    url: "https://prayagkansara.design",
+    siteName: "Prayag Kansara Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Prayag Kansara — Web Designer & Full-Stack Developer",
+    description:
+      "Portfolio of Prayag Kansara, Web Designer & Full-Stack Developer.",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className="scroll-smooth">
+      <body className="bg-[#F5F1E8] text-[#171717] antialiased selection:bg-[#B85C3A] selection:text-white">
+        {children}
+      </body>
+    </html>
+  );
+}
