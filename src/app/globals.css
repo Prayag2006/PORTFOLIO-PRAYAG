@@ -87,6 +87,89 @@ html.lenis body {
   outline-offset: 3px;
 }
 
+/* Hero Entrance
+   Measured: the H1 wordmark is the LCP element (152ms), and above 1024px the
+   portrait is larger still, so it becomes the candidate there. An element at
+   opacity 0 is not LCP-eligible, so those two animate transform only and stay
+   painted from the first frame; everything else is free to fade. Transforms
+   also mean none of this can shift layout, so CLS stays at zero. */
+@keyframes enterRise {
+  from {
+    transform: translateY(34px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes enterFade {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes enterDisc {
+  from {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes enterOpacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.enter-rise,
+.enter-fade,
+.enter-disc,
+.enter-opacity {
+  animation-duration: 0.9s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+  animation-delay: var(--enter-delay, 0ms);
+}
+
+.enter-rise {
+  animation-name: enterRise;
+}
+
+.enter-fade {
+  animation-name: enterFade;
+}
+
+.enter-disc {
+  animation-name: enterDisc;
+}
+
+/* For elements that already carry a Tailwind transform (the badge, the disc
+   wrapper) — animating transform there would clobber their positioning. */
+.enter-opacity {
+  animation-name: enterOpacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter-rise,
+  .enter-fade,
+  .enter-disc,
+  .enter-opacity {
+    animation: none;
+  }
+}
+
 /* Scroll Reveal
    The hidden state is scoped to html.js, which an inline script in the layout
    sets before paint. Without JavaScript the class never lands, so every

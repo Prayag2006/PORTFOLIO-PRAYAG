@@ -2,39 +2,62 @@ import React from "react";
 import Image from "next/image";
 import { HeroBackdrop } from "@/components/hero/HeroBackdrop";
 
+/** Stagger helper — feeds the shared --enter-delay custom property. */
+const delay = (ms: number) =>
+  ({ "--enter-delay": `${ms}ms` }) as React.CSSProperties;
+
 export const Hero: React.FC = () => {
   return (
     <section className="relative w-full overflow-hidden border-b border-[#C9C2B7] bg-[#F5F1E8] lg:min-h-[94vh]">
-      {/* Oversized wordmark. The portrait deliberately crosses in front of it —
-          that overlap is the whole composition, so it must never be clipped. */}
-      <h1 className="select-none px-2 pt-6 text-center font-display uppercase leading-[0.74] tracking-[-0.015em] text-[#171717] text-[clamp(3.25rem,27.4vw,26rem)] md:pt-8">
+      {/*
+        Oversized wordmark. The portrait deliberately crosses in front of it —
+        that overlap is the whole composition, so it must never be clipped.
+        This is the measured LCP element, so its entrance is transform-only:
+        fading it in would push LCP out by the full animation delay.
+      */}
+      <h1 className="enter-rise select-none px-2 pt-6 text-center font-display uppercase leading-[0.74] tracking-[-0.015em] text-[#171717] text-[clamp(3.25rem,27.4vw,26rem)] md:pt-8">
         Portfolio
       </h1>
 
       {/* Copy sits in the lower left, clear of the figure. */}
       <div className="relative z-20 mx-auto max-w-[1400px] px-6 md:px-10 lg:px-14">
         <div className="max-w-[34rem] pb-10 pt-6 lg:max-w-[26rem] lg:pb-24 lg:pt-10">
-          <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-[#55504A]">
+          <p
+            style={delay(220)}
+            className="enter-fade text-[11px] font-medium uppercase tracking-[0.3em] text-[#55504A]"
+          >
             Hello, I&apos;m
           </p>
 
-          <h2 className="mt-3 font-serif uppercase leading-[0.88] tracking-tight text-[#171717] text-[clamp(2.6rem,6.2vw,5.5rem)]">
+          <h2
+            style={delay(300)}
+            className="enter-fade mt-3 font-serif uppercase leading-[0.88] tracking-tight text-[#171717] text-[clamp(2.6rem,6.2vw,5.5rem)]"
+          >
             Prayag
             <br />
             Kansara
           </h2>
 
-          <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-[#B85C3A] sm:text-[13px]">
+          <p
+            style={delay(380)}
+            className="enter-fade mt-4 text-xs font-bold uppercase tracking-[0.16em] text-[#B85C3A] sm:text-[13px]"
+          >
             Web Designer &amp; Full-Stack Developer
           </p>
 
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#55504A]">
+          <p
+            style={delay(460)}
+            className="enter-fade mt-5 max-w-sm text-sm leading-relaxed text-[#55504A]"
+          >
             I craft clean, modern, and user-focused digital experiences that
             combine strong visual design, thoughtful interaction, and reliable
             technology.
           </p>
 
-          <span className="mt-6 block select-none font-signature text-4xl leading-none text-[#171717] sm:text-5xl">
+          <span
+            style={delay(540)}
+            className="enter-fade mt-6 block select-none font-signature text-4xl leading-none text-[#171717] sm:text-5xl"
+          >
             Prayag Kansara
           </span>
         </div>
@@ -49,17 +72,24 @@ export const Hero: React.FC = () => {
         {/* Swap variant to "sculpture" to bring back the animated 3D monolith. */}
         <HeroBackdrop variant="circle" />
 
+        {/* Transform-only, like the wordmark: above 1024px this is the largest
+            element in the viewport and therefore the LCP candidate. */}
         <Image
           src="/images/prayag.webp"
           alt="Prayag Kansara"
           fill
           priority
-          className="object-contain object-bottom"
+          style={delay(140)}
+          className="enter-rise object-contain object-bottom"
           sizes="(max-width: 640px) 290px, (max-width: 1024px) 350px, 540px"
         />
 
-        {/* Rotating availability badge, breaking the figure's right edge. */}
-        <div className="absolute right-0 top-[46%] z-30 flex h-24 w-24 translate-x-1/4 items-center justify-center rounded-full border border-[#C9C2B7] bg-[#F5F1E8]/95 p-2 sm:h-28 sm:w-28 lg:top-[40%] lg:h-44 lg:w-44">
+        {/* Rotating availability badge, breaking the figure's right edge.
+            Opacity-only — it already carries a Tailwind translate. */}
+        <div
+          style={delay(760)}
+          className="enter-opacity absolute right-0 top-[46%] z-30 flex h-24 w-24 translate-x-1/4 items-center justify-center rounded-full border border-[#C9C2B7] bg-[#F5F1E8]/95 p-2 sm:h-28 sm:w-28 lg:top-[40%] lg:h-44 lg:w-44"
+        >
           <svg className="h-full w-full animate-spin-slow" viewBox="0 0 100 100">
             <path
               id="circlePath"

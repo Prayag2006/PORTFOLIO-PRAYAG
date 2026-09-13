@@ -6,13 +6,16 @@ import React from "react";
  * them invert against whatever is behind rather than needing overrides.
  */
 const LABEL =
-  "hidden lg:flex fixed z-40 pointer-events-none select-none items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-medium text-[#F5F1E8] mix-blend-difference";
+  "enter-opacity hidden lg:flex fixed z-40 pointer-events-none select-none items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-medium text-[#F5F1E8] mix-blend-difference";
 
 const Rule = () => <span className="h-[1px] w-4 bg-[#F5F1E8]" />;
 
 export const VerticalSideLabels: React.FC = () => {
   return (
-    <div aria-hidden="true">
+    <div
+      aria-hidden="true"
+      style={{ "--enter-delay": "900ms" } as React.CSSProperties}
+    >
       <div className={`${LABEL} left-6 top-[28%]`}>
         <Rule />
         <span className="writing-mode-vertical whitespace-nowrap">

@@ -57,8 +57,14 @@ export const HeroBackdrop: React.FC<{ variant?: BackdropVariant }> = ({
         <MonolithScene animate={!prefersReducedMotion && inView} />
       ) : (
         /* Disc sized and placed so the figure's torso covers its right half,
-           exactly as the reference crops it. */
-        <div className="absolute left-1/2 top-[16%] aspect-square w-[76%] -translate-x-[58%] rounded-full bg-[#B85C3A]" />
+           exactly as the reference crops it. The positioning translate lives on
+           the wrapper so the entrance animation can own the inner transform. */
+        <div className="absolute left-1/2 top-[16%] aspect-square w-[76%] -translate-x-[58%]">
+          <div
+            style={{ "--enter-delay": "60ms" } as React.CSSProperties}
+            className="enter-disc h-full w-full rounded-full bg-[#B85C3A]"
+          />
+        </div>
       )}
     </div>
   );

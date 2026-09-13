@@ -3,7 +3,7 @@ import { MoveRight } from "lucide-react";
 
 export const Header: React.FC = () => {
   return (
-    <header className="flex w-full select-none items-center justify-between border-b border-[#C9C2B7] px-6 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#171717] md:px-10 lg:px-14">
+    <header className="enter-opacity flex w-full select-none items-center justify-between border-b border-[#C9C2B7] px-6 py-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#171717] md:px-10 lg:px-14">
       <div className="flex items-center gap-3">
         <span className="text-base font-bold leading-none text-[#B85C3A]">
           ✳
