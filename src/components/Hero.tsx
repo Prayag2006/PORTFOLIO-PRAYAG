@@ -4,7 +4,7 @@ import { HeroBackdrop } from "@/components/hero/HeroBackdrop";
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative w-full overflow-hidden border-b-2 border-[#171717] bg-[#F5F1E8] lg:min-h-[94vh]">
+    <section className="relative w-full overflow-hidden border-b border-[#C9C2B7] bg-[#F5F1E8] lg:min-h-[94vh]">
       {/* Oversized wordmark. The portrait deliberately crosses in front of it —
           that overlap is the whole composition, so it must never be clipped. */}
       <h1 className="select-none px-2 pt-6 text-center font-display uppercase leading-[0.74] tracking-[-0.015em] text-[#171717] text-[clamp(3.25rem,27.4vw,26rem)] md:pt-8">

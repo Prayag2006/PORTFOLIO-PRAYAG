@@ -47,37 +47,37 @@ html.lenis body {
   overflow: hidden;
 }
 
-/* Brutalist Primitives
-   Hard 2px ink borders with a solid offset block instead of a soft shadow.
-   .brutal-lift collapses the offset on hover/focus so the card "presses in". */
-.brutal-block {
-  border: 2px solid var(--text-main);
-  box-shadow: 6px 6px 0 0 var(--text-main);
+/* Editorial Surfaces
+   The hero sets the language: hairline warm borders, circular shapes, no
+   offset blocks or hard shadows. Cards echo that rather than the heavier
+   brutalist treatment they carried before. */
+.panel {
+  border: 1px solid var(--warm-border);
+  background-color: var(--bg-warm);
 }
 
-.brutal-lift {
+.panel-hover {
   transition:
-    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.25s ease;
+    border-color 0.4s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.brutal-lift:hover,
-.brutal-lift:focus-visible,
-.project-card:hover .brutal-lift,
-.project-card:focus-visible .brutal-lift {
-  transform: translate(6px, 6px);
-  box-shadow: 0 0 0 0 var(--text-main);
+.panel-hover:hover,
+.panel-hover:focus-visible,
+.project-card:hover .panel-hover,
+.project-card:focus-visible .panel-hover {
+  border-color: var(--burnt-orange);
+  transform: translateY(-4px);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .brutal-lift,
-  .brutal-lift:hover,
-  .brutal-lift:focus-visible,
-  .project-card:hover .brutal-lift,
-  .project-card:focus-visible .brutal-lift {
+  .panel-hover,
+  .panel-hover:hover,
+  .panel-hover:focus-visible,
+  .project-card:hover .panel-hover,
+  .project-card:focus-visible .panel-hover {
     transform: none;
-    transition: box-shadow 0.25s ease;
+    transition: border-color 0.4s ease;
   }
 }
 

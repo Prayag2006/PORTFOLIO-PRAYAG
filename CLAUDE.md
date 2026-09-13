@@ -17,35 +17,43 @@ React and react-dom are **pinned to 19.2.8**. `@react-three/fiber@9` declares
 `react >=19 <19.3`; React 19.3 breaks its custom reconciler. Do not bump React
 past 19.2.x until R3F ships a release that supports it.
 
-## Design language — "warm brutalism"
+## Design language — editorial
 
-Evolving the existing warm editorial base toward bold, high-contrast brutalism.
-Keep the warm identity; add hard edges and heavy weight.
+Driven by the hero: an oversized Bebas Neue wordmark, a cut-out portrait
+crossing in front of it, a burnt-orange disc, and hairline rules. An earlier
+pass styled the page as "warm brutalism" (2px ink borders, solid offset
+blocks, squared avatars); that was replaced to match the hero reference. Do
+not reintroduce offset shadows or heavy ink borders.
 
 | Token | Value | Use |
 |---|---|---|
 | `warmBg` | `#F5F1E8` | page ground |
 | `warmBgAlt` | `#F1EDE3` | alternating sections |
-| `textMain` | `#171717` | body + brutalist blocks |
+| `textMain` | `#171717` | headings + body |
 | `textMuted` | `#55504A` | secondary copy |
-| `burntOrange` | `#B85C3A` | single accent — use sparingly |
-| `warmBorder` | `#C9C2B7` | hairline rules |
+| `burntOrange` | `#B85C3A` | single accent |
+| `warmBorder` | `#C9C2B7` | every rule and card border |
 
-Fonts (CSS vars in `globals.css`): `--font-display` Bebas Neue (oversized
-headlines), `--font-serif` DM Serif Display (names/titles), `--font-sans` Inter
-(body), `--font-signature` Caveat (signature only).
+Fonts (CSS vars in `globals.css`): `--font-display` Bebas Neue (the wordmark
+and every section heading), `--font-serif` DM Serif Display (names, set
+uppercase), `--font-sans` Inter (body), `--font-signature` Caveat (signature).
 
 Rules:
-- Oversized viewport-unit type (`text-[15vw]`) is a signature move — keep it.
-- Borders are structural and visible (`border-2`/`border-4` black), not decorative shadows.
-- Exactly one accent color per viewport. Orange is a highlight, never a background wash.
-- Hard edges over soft shadows. Prefer offset solid blocks to blur.
-- Motion is snappy and mechanical: `cubic-bezier(0.16, 1, 0.3, 1)`, 300–600ms.
+- Section headings all use `<SectionHeading>` so they tie back to the hero
+  wordmark. Do not hand-roll one.
+- Borders are **1px `warmBorder`**, never 2px ink. Surfaces use `.panel`;
+  interactive ones add `.panel-hover` (border turns orange, 4px lift).
+- Circles are part of the language — the hero disc, the badge, avatars,
+  capability markers.
+- Exactly one accent colour per viewport. Orange is a highlight, never a wash.
+- Motion is quiet: `cubic-bezier(0.16, 1, 0.3, 1)`, 300-700ms.
+- Scroll reveals go through `<Reveal>`; stagger siblings with `delay={index}`.
 
 ## 3D rules — non-negotiable
 
-The 3D is **one focal object in the hero plus subtle accents**. It must never
-make the site slow. Every Canvas must follow these:
+The 3D sculpture is **opt-in**: `HeroBackdrop` defaults to the flat orange
+disc from the reference, and `variant="sculpture"` swaps in the animated
+monolith. If it is enabled, every Canvas must follow these:
 
 1. **Always** load via `dynamic(() => import(...), { ssr: false })`. WebGL has no
    `window` on the server.

@@ -2,7 +2,7 @@ import React from "react";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full border-t-2 border-[#171717] py-8 px-6 md:px-12 lg:px-16 bg-[#F5F1E8] text-[11px] font-semibold tracking-[0.2em] text-[#55504A] uppercase select-none">
+    <footer className="w-full border-t border-[#C9C2B7] py-8 px-6 md:px-12 lg:px-16 bg-[#F5F1E8] text-[11px] font-semibold tracking-[0.2em] text-[#55504A] uppercase select-none">
       <div className="max-w-[1360px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
         {/* Left Copyright */}
         <div>
