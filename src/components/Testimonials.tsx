@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { SectionHeading } from "@/components/SectionHeading";
 
 interface Testimonial {
   id: string;
@@ -39,77 +40,76 @@ const testimonials: Testimonial[] = [
 
 export const Testimonials: React.FC = () => {
   return (
-    <section className="w-full border-b border-[#C9C2B7] py-16 md:py-24 px-6 md:px-12 lg:px-16 bg-[#F5F1E8]">
-      <div className="max-w-[1360px] mx-auto">
+    <section
+      id="testimonials"
+      className="w-full border-b-2 border-[#171717] bg-[#F5F1E8] px-6 py-16 md:px-12 md:py-24 lg:px-16"
+    >
+      <div className="mx-auto max-w-[1360px]">
         {/* Section Header Row */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end pb-12 border-b border-[#C9C2B7]">
-          {/* Left Title */}
-          <div className="md:col-span-4">
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl leading-tight">
-              <span className="block text-[#171717]">WHAT CLIENTS</span>
-              <span className="block text-[#B85C3A]">SAY</span>
-            </h2>
+        <div className="grid grid-cols-1 items-end gap-6 border-b-2 border-[#171717] pb-10 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <SectionHeading lead="What Clients" accent="Say" />
           </div>
 
-          {/* Center Subtitle */}
-          <div className="md:col-span-5">
-            <p className="text-xs sm:text-sm text-[#55504A] leading-relaxed max-w-sm">
+          <div className="md:col-span-4">
+            <p className="max-w-sm text-xs leading-relaxed text-[#55504A] sm:text-sm">
               Honest feedback from amazing clients I&apos;ve had the pleasure to
               work with on recent digital projects.
             </p>
           </div>
 
-          {/* Right Link */}
           <div className="md:col-span-3 md:text-right">
             <a
               href="#testimonials"
-              className="group inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-[#171717] hover:text-[#B85C3A] transition-colors duration-300"
+              className="group inline-flex items-center gap-2 border-2 border-[#171717] px-4 py-2.5 text-xs font-bold uppercase tracking-[0.18em] text-[#171717] transition-colors duration-300 hover:bg-[#171717] hover:text-[#F5F1E8]"
             >
-              <span>MORE REVIEWS</span>
-              <ArrowUpRight className="w-4 h-4 text-[#B85C3A] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+              <span>More reviews</span>
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
         </div>
 
-        {/* 3-Column Editorial Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-10">
+        {/* Testimonial Cards */}
+        <div className="grid grid-cols-1 gap-x-8 gap-y-10 pt-12 md:grid-cols-3">
           {testimonials.map((t) => (
-            <div
+            <figure
               key={t.id}
-              className="border border-[#C9C2B7] p-8 bg-[#F5F1E8] flex flex-col justify-between space-y-8 hover:border-[#B85C3A] transition-colors duration-300"
+              className="brutal-block flex flex-col justify-between bg-[#F5F1E8] p-7"
             >
-              {/* Quote Block */}
               <div className="flex flex-col space-y-4">
-                <span className="text-3xl font-serif text-[#B85C3A] leading-none">
-                  “
+                <span
+                  aria-hidden="true"
+                  className="font-serif text-4xl leading-none text-[#B85C3A]"
+                >
+                  &ldquo;
                 </span>
-                <p className="text-xs sm:text-sm text-[#55504A] leading-relaxed">
+                <blockquote className="text-xs leading-relaxed text-[#55504A] sm:text-sm">
                   {t.quote}
-                </p>
+                </blockquote>
               </div>
 
-              {/* Client Info Row */}
-              <div className="flex items-center gap-3.5 pt-4 border-t border-[#C9C2B7]/60">
-                {/* Avatar Image */}
-                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#C9C2B7] flex-shrink-0">
+              <figcaption className="mt-8 flex items-center gap-3.5 border-t-2 border-[#171717] pt-5">
+                {/* Square avatar — circles belong to the old editorial pass. */}
+                <div className="relative h-11 w-11 flex-shrink-0 overflow-hidden border-2 border-[#171717]">
                   <Image
                     src={t.avatar}
                     alt={t.name}
                     fill
                     className="object-cover"
-                    sizes="40px"
+                    sizes="44px"
                   />
                 </div>
 
-                {/* Name & Role */}
                 <div className="flex flex-col">
-                  <h4 className="text-xs font-bold text-[#171717]">{t.name}</h4>
-                  <span className="text-[11px] text-[#55504A] font-normal">
+                  <span className="text-xs font-bold text-[#171717]">
+                    {t.name}
+                  </span>
+                  <span className="text-[11px] font-normal text-[#55504A]">
                     {t.role}
                   </span>
                 </div>
-              </div>
-            </div>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>

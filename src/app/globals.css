@@ -29,6 +29,64 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Lenis smooth scroll — required for the wrapper to size correctly. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Brutalist Primitives
+   Hard 2px ink borders with a solid offset block instead of a soft shadow.
+   .brutal-lift collapses the offset on hover/focus so the card "presses in". */
+.brutal-block {
+  border: 2px solid var(--text-main);
+  box-shadow: 6px 6px 0 0 var(--text-main);
+}
+
+.brutal-lift {
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease;
+}
+
+.brutal-lift:hover,
+.brutal-lift:focus-visible,
+.project-card:hover .brutal-lift,
+.project-card:focus-visible .brutal-lift {
+  transform: translate(6px, 6px);
+  box-shadow: 0 0 0 0 var(--text-main);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brutal-lift,
+  .brutal-lift:hover,
+  .brutal-lift:focus-visible,
+  .project-card:hover .brutal-lift,
+  .project-card:focus-visible .brutal-lift {
+    transform: none;
+    transition: box-shadow 0.25s ease;
+  }
+}
+
+/* Keyboard focus must always be visible against the cream ground. */
+:focus-visible {
+  outline: 3px solid var(--burnt-orange);
+  outline-offset: 3px;
+}
+
 /* Vertical Text Utilities */
 .writing-mode-vertical {
   writing-mode: vertical-rl;

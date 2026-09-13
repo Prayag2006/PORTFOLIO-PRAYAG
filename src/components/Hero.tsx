@@ -4,7 +4,7 @@ import { Hero3D } from "@/components/hero/Hero3D";
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative w-full border-b border-[#C9C2B7] pt-8 pb-16 px-6 md:px-12 lg:px-16 overflow-hidden">
+    <section className="relative w-full border-b-2 border-[#171717] pt-8 pb-16 px-6 md:px-12 lg:px-16 overflow-hidden">
       {/* 1. Oversized PORTFOLIO Headline */}
       <div className="w-full text-center select-none overflow-hidden pb-4 md:pb-8">
         <h1 className="font-display font-extrabold text-[15.5vw] leading-[0.82] tracking-tight text-[#171717] uppercase block transform scale-y-[1.15] origin-bottom">
@@ -50,7 +50,7 @@ export const Hero: React.FC = () => {
           <Hero3D />
 
           {/* User Portrait Container */}
-          <div className="relative z-10 w-[260px] h-[340px] sm:w-[340px] sm:h-[440px] md:w-[370px] md:h-[470px] rounded-t-full overflow-hidden border-b-0 border-[#C9C2B7] shadow-xl">
+          <div className="brutal-block relative z-10 w-[260px] h-[340px] sm:w-[340px] sm:h-[440px] md:w-[370px] md:h-[470px] overflow-hidden bg-[#EBE5D8]">
             <Image
               src="/images/prayag.jpg"
               alt="Prayag Kansara — Web Designer"
@@ -62,7 +62,7 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Editorial Rotating Circular Badge */}
-          <div className="absolute right-0 top-12 sm:top-16 md:-right-6 md:top-20 z-20 w-28 h-28 sm:w-36 sm:h-36 bg-[#F5F1E8]/90 backdrop-blur-sm rounded-full border border-[#C9C2B7] flex items-center justify-center p-2 shadow-lg">
+          <div className="absolute right-0 top-12 sm:top-16 md:-right-6 md:top-20 z-20 w-28 h-28 sm:w-36 sm:h-36 bg-[#F5F1E8] border-2 border-[#171717] rounded-full flex items-center justify-center p-2 shadow-lg">
             {/* SVG Curved Circular Text */}
             <svg
               className="w-full h-full animate-spin-slow"

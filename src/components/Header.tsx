@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export const Header: React.FC = () => {
   return (
-    <header className="w-full border-b border-[#C9C2B7] py-5 px-6 md:px-12 flex justify-between items-center text-xs tracking-[0.2em] uppercase font-semibold text-[#171717] select-none">
+    <header className="w-full border-b-2 border-[#171717] py-5 px-6 md:px-12 flex justify-between items-center text-xs tracking-[0.2em] uppercase font-semibold text-[#171717] select-none">
       <div className="flex items-center gap-3">
         <span className="text-[#B85C3A] text-base leading-none font-bold">✳</span>
         <span className="text-[#171717]">WEB DESIGNER</span>

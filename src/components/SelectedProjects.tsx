@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { SectionHeading } from "@/components/SectionHeading";
 
 interface Project {
   id: string;
@@ -48,70 +49,66 @@ const projects: Project[] = [
 
 export const SelectedProjects: React.FC = () => {
   return (
-    <section className="w-full border-b border-[#C9C2B7] py-16 md:py-24 px-6 md:px-12 lg:px-16 bg-[#F5F1E8]">
-      <div className="max-w-[1360px] mx-auto">
+    <section
+      id="projects"
+      className="w-full border-b-2 border-[#171717] bg-[#F5F1E8] px-6 py-16 md:px-12 md:py-24 lg:px-16"
+    >
+      <div className="mx-auto max-w-[1360px]">
         {/* Section Header Row */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end pb-12 border-b border-[#C9C2B7]">
-          {/* Left Title */}
-          <div className="md:col-span-4">
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl leading-tight">
-              <span className="block text-[#171717]">SELECTED</span>
-              <span className="block text-[#B85C3A]">PROJECTS</span>
-            </h2>
+        <div className="grid grid-cols-1 items-end gap-6 border-b-2 border-[#171717] pb-10 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <SectionHeading lead="Selected" accent="Projects" />
           </div>
 
-          {/* Center Description */}
-          <div className="md:col-span-5">
-            <p className="text-xs sm:text-sm text-[#55504A] leading-relaxed max-w-sm">
-              A curated selection of recent work showcasing web design, full-stack
-              development, and creative problem-solving.
+          <div className="md:col-span-4">
+            <p className="max-w-sm text-xs leading-relaxed text-[#55504A] sm:text-sm">
+              A curated selection of recent work showcasing web design,
+              full-stack development, and creative problem-solving.
             </p>
           </div>
 
-          {/* Right Action Link */}
           <div className="md:col-span-3 md:text-right">
             <a
               href="#projects"
-              className="group inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-[#171717] hover:text-[#B85C3A] transition-colors duration-300"
+              className="group inline-flex items-center gap-2 border-2 border-[#171717] bg-[#171717] px-4 py-2.5 text-xs font-bold uppercase tracking-[0.18em] text-[#F5F1E8] transition-colors duration-300 hover:bg-[#B85C3A] hover:border-[#B85C3A]"
             >
-              <span>VIEW ALL PROJECTS</span>
-              <ArrowUpRight className="w-4 h-4 text-[#B85C3A] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+              <span>View all projects</span>
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
         </div>
 
-        {/* 4-Column Project Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-10">
+        {/* Project Grid */}
+        <div className="grid grid-cols-1 gap-x-8 gap-y-12 pt-12 sm:grid-cols-2 lg:grid-cols-4">
           {projects.map((project) => (
             <a
               key={project.id}
               href={project.link}
-              className="project-card group block flex flex-col space-y-4 text-left"
+              className="project-card group flex flex-col text-left"
             >
-              {/* Project Image Box */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#C9C2B7] bg-[#EBE5D8]">
+              {/* Hard-bordered image block with a solid offset that collapses on hover */}
+              <div className="brutal-block brutal-lift relative aspect-[4/3] w-full overflow-hidden bg-[#EBE5D8]">
                 <Image
                   src={project.image}
-                  alt={project.title}
+                  alt={`${project.title} — ${project.category}`}
                   fill
-                  className="project-card-image object-cover filter contrast-[1.02]"
+                  className="project-card-image object-cover"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
 
-              {/* Project Metadata Footer */}
-              <div className="flex items-start gap-3 pt-1">
-                {/* Large Serif Accent Number */}
-                <span className="font-serif text-2xl font-normal text-[#B85C3A] leading-none pt-0.5">
+              {/* Metadata */}
+              <div className="flex items-stretch gap-3 pt-5">
+                {/* Solid ink index block */}
+                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center bg-[#171717] font-display text-lg leading-none text-[#F5F1E8]">
                   {project.number}
                 </span>
 
-                {/* Title & Category */}
-                <div className="flex flex-col space-y-0.5">
-                  <h3 className="project-card-title font-sans font-bold text-base text-[#171717] leading-tight">
+                <div className="flex flex-col justify-center">
+                  <h3 className="project-card-title font-sans text-base font-bold leading-tight text-[#171717]">
                     {project.title}
                   </h3>
-                  <p className="text-xs text-[#55504A] font-normal">
+                  <p className="text-xs font-normal text-[#55504A]">
                     {project.category}
                   </p>
                 </div>

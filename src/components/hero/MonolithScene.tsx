@@ -62,6 +62,7 @@ function Slab({
 function Composition({ animate }: { animate: boolean }) {
   const group = useRef<Group>(null);
   const pointer = useRef({ x: 0, y: 0 });
+  const scroll = useRef(0);
 
   /*
    * Pointer is tracked on window rather than via R3F's canvas events: the
@@ -78,22 +79,36 @@ function Composition({ animate }: { animate: boolean }) {
     return () => window.removeEventListener("pointermove", onMove);
   }, [animate]);
 
+  useEffect(() => {
+    const onScroll = () => {
+      // 0 at the top of the page, 1 after one viewport of scrolling.
+      scroll.current = Math.min(window.scrollY / window.innerHeight, 1);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   useFrame((state, delta) => {
     const g = group.current;
     if (!g || !animate) return;
     const spin = state.clock.elapsedTime * 0.12;
+    const scrolled = scroll.current;
     g.rotation.y = MathUtils.damp(
       g.rotation.y,
-      0.5 + spin + pointer.current.x * 0.34,
+      0.5 + spin + pointer.current.x * 0.34 + scrolled * 1.5,
       3,
       delta,
     );
     g.rotation.x = MathUtils.damp(
       g.rotation.x,
-      0.12 + pointer.current.y * 0.16,
+      0.12 + pointer.current.y * 0.16 - scrolled * 0.35,
       3,
       delta,
     );
+    // Sinks and recedes as the hero scrolls away, so it hands off to the page.
+    g.position.y = MathUtils.damp(g.position.y, -0.45 - scrolled * 1.1, 3, delta);
+    g.position.z = MathUtils.damp(g.position.z, -scrolled * 1.6, 3, delta);
   });
 
   return (

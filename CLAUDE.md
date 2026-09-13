@@ -56,8 +56,8 @@ make the site slow. Every Canvas must follow these:
 4. `frameloop="demand"` for anything static; only use `"always"` when something
    animates continuously, and `invalidate()` on interaction.
 5. Respect `prefers-reduced-motion` — fall back to a static frame, no exceptions.
-6. Mobile (`< 768px`) gets a poster image or a drastically reduced scene, never
-   the full desktop scene.
+6. The hero scene is gated at `lg` (>= 1024px), where the two-column layout
+   exists. Phones and tablets get a flat block and never download three.js.
 7. Models: Draco or Meshopt compressed `.glb`, KTX2 textures. Budget: under 1MB
    for the hero asset.
 8. Dispose geometries/materials on unmount; never allocate `new THREE.Vector3()`

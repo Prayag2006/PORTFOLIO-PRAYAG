@@ -3,42 +3,40 @@ import { Mail, Globe, MapPin } from "lucide-react";
 
 export const ContactCTA: React.FC = () => {
   return (
+    /* Solid ink block — the page's one full inversion, closing it with weight. */
     <section
       id="contact"
-      className="w-full border-b border-[#C9C2B7] py-16 md:py-24 px-6 md:px-12 lg:px-16 bg-[#F5F1E8]"
+      className="w-full bg-[#171717] px-6 py-20 text-[#F5F1E8] md:px-12 md:py-28 lg:px-16"
     >
-      <div className="max-w-[1360px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        {/* Left Column: Headline & Subtext (6 cols) */}
-        <div className="lg:col-span-6 flex flex-col space-y-4">
-          <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl leading-[0.95] text-[#171717] tracking-tight">
-            <span>LET&apos;S CREATE</span>
-            <br />
-            <span className="text-[#B85C3A]">SOMETHING GREAT</span>
+      <div className="mx-auto grid max-w-[1360px] grid-cols-1 items-center gap-12 lg:grid-cols-12">
+        {/* Headline */}
+        <div className="flex flex-col space-y-5 lg:col-span-6">
+          <h2 className="font-display uppercase leading-[0.82] tracking-tight text-[clamp(2.75rem,7vw,5.5rem)]">
+            <span className="block">Let&apos;s create</span>
+            <span className="block text-[#B85C3A]">something great</span>
           </h2>
 
-          <p className="text-sm md:text-base text-[#55504A] font-normal leading-relaxed max-w-md pt-2">
+          <p className="max-w-md text-sm font-normal leading-relaxed text-[#C9C2B7] md:text-base">
             Have a project in mind? Let&apos;s build something that makes an
             impact and elevates your brand online.
           </p>
         </div>
 
-        {/* Center Column: QR Code & Handwritten Arrow (3 cols) */}
-        <div className="lg:col-span-3 flex flex-col sm:flex-row items-center justify-center gap-4 lg:border-x border-[#C9C2B7] py-6 lg:py-0 px-4">
-          {/* Custom Stylized QR Code Box */}
-          <div className="w-24 h-24 bg-white border border-[#C9C2B7] p-2 flex items-center justify-center flex-shrink-0 shadow-sm">
+        {/* QR block */}
+        <div className="flex flex-col items-center justify-center gap-4 border-[#55504A] py-6 sm:flex-row lg:col-span-3 lg:border-x-2 lg:py-0 lg:px-4">
+          <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center border-2 border-[#F5F1E8] bg-[#F5F1E8] p-2">
             <svg
               viewBox="0 0 100 100"
-              className="w-full h-full text-[#171717] fill-current"
+              className="h-full w-full fill-current text-[#171717]"
+              role="img"
+              aria-label="QR code linking to prayagkansara.design"
             >
-              {/* Corner Position Detection Patterns */}
               <rect x="5" y="5" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="6" />
               <rect x="13" y="13" width="14" height="14" />
               <rect x="65" y="5" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="6" />
               <rect x="73" y="13" width="14" height="14" />
               <rect x="5" y="65" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="6" />
               <rect x="13" y="73" width="14" height="14" />
-
-              {/* Data Blocks */}
               <rect x="42" y="10" width="8" height="8" />
               <rect x="52" y="18" width="8" height="8" />
               <rect x="42" y="28" width="8" height="8" />
@@ -54,47 +52,41 @@ export const ContactCTA: React.FC = () => {
             </svg>
           </div>
 
-          {/* Label + Handwritten Arrow */}
-          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#171717] leading-tight">
-              SCAN TO VISIT
+          <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
+            <span className="text-[10px] font-bold uppercase leading-tight tracking-[0.18em]">
+              Scan to visit
               <br />
-              MY WEBSITE
+              my website
             </span>
-            {/* Cursive Decorative Arrow */}
-            <span className="font-signature text-2xl text-[#B85C3A] leading-none pt-1">
+            <span aria-hidden="true" className="pt-1 font-signature text-2xl leading-none text-[#B85C3A]">
               ⤵
             </span>
           </div>
         </div>
 
-        {/* Right Column: Contact Details (3 cols) */}
-        <div className="lg:col-span-3 flex flex-col space-y-4 text-xs font-semibold text-[#171717] tracking-wider uppercase">
+        {/* Contact details */}
+        <div className="flex flex-col space-y-3 lg:col-span-3">
           <a
             href="mailto:hello@prayagkansara.design"
-            className="flex items-center gap-3 hover:text-[#B85C3A] transition-colors duration-300"
+            className="group flex items-center gap-3 border-2 border-[#55504A] px-4 py-3 transition-colors duration-300 hover:border-[#B85C3A] hover:bg-[#B85C3A]"
           >
-            <Mail className="w-4 h-4 text-[#B85C3A]" />
-            <span className="lowercase font-sans text-sm tracking-normal">
-              hello@prayagkansara.design
-            </span>
+            <Mail className="h-4 w-4 flex-shrink-0 text-[#B85C3A] transition-colors duration-300 group-hover:text-[#F5F1E8]" aria-hidden="true" />
+            <span className="font-sans text-sm">hello@prayagkansara.design</span>
           </a>
 
           <a
             href="https://prayagkansara.design"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 hover:text-[#B85C3A] transition-colors duration-300"
+            className="group flex items-center gap-3 border-2 border-[#55504A] px-4 py-3 transition-colors duration-300 hover:border-[#B85C3A] hover:bg-[#B85C3A]"
           >
-            <Globe className="w-4 h-4 text-[#B85C3A]" />
-            <span className="lowercase font-sans text-sm tracking-normal">
-              www.prayagkansara.design
-            </span>
+            <Globe className="h-4 w-4 flex-shrink-0 text-[#B85C3A] transition-colors duration-300 group-hover:text-[#F5F1E8]" aria-hidden="true" />
+            <span className="font-sans text-sm">www.prayagkansara.design</span>
           </a>
 
-          <div className="flex items-center gap-3 text-[#55504A]">
-            <MapPin className="w-4 h-4 text-[#B85C3A]" />
-            <span className="text-xs uppercase tracking-widest font-medium">
+          <div className="flex items-center gap-3 px-4 py-1 text-[#C9C2B7]">
+            <MapPin className="h-4 w-4 flex-shrink-0 text-[#B85C3A]" aria-hidden="true" />
+            <span className="text-xs font-medium uppercase tracking-widest">
               Remote Worldwide
             </span>
           </div>
