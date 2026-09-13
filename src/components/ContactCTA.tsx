@@ -14,25 +14,29 @@ export const ContactCTA: React.FC = () => {
       className="w-full bg-[#171717] px-6 py-20 text-[#F5F1E8] md:px-12 md:py-28 lg:px-16"
     >
       <div className="mx-auto grid max-w-[1360px] grid-cols-1 items-center gap-12 lg:grid-cols-12">
-        {/* Headline */}
-        <Reveal className="lg:col-span-6">
-          <div className="flex flex-col space-y-5">
-            <h2 className="font-display uppercase leading-[0.82] tracking-tight text-[clamp(2.75rem,7vw,5.5rem)]">
-              <span className="block">Let&apos;s create</span>
-              {/* Orange sits at ~3.4:1 on ink — fine at this size, but keep it
-                  off small text in this section. */}
-              <span className="block text-[#B85C3A]">something great</span>
-            </h2>
+        {/* Headline — each line reveals on its own so the type lands in sequence. */}
+        <div className="flex flex-col space-y-5 lg:col-span-6">
+          <h2 className="font-display uppercase leading-[0.82] tracking-tight text-[clamp(2.75rem,7vw,5.5rem)]">
+            <Reveal as="span" className="block">
+              Let&apos;s create
+            </Reveal>
+            {/* Orange sits at ~3.4:1 on ink — fine at this size, but keep it
+                off small text in this section. */}
+            <Reveal as="span" className="block text-[#B85C3A]" delay={1}>
+              something great
+            </Reveal>
+          </h2>
 
+          <Reveal delay={2}>
             <p className="max-w-md text-sm font-normal leading-relaxed text-[#C9C2B7] md:text-base">
               Have a project in mind? Let&apos;s build something that makes an
               impact and elevates your brand online.
             </p>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
 
         {/* QR block */}
-        <Reveal className="lg:col-span-3" delay={1}>
+        <Reveal className="lg:col-span-3" delay={3}>
           <div className="flex flex-col items-center justify-center gap-4 border-[#3A3735] py-6 sm:flex-row lg:border-x lg:px-4 lg:py-0">
             <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center bg-[#F5F1E8] p-2">
               <svg
@@ -78,10 +82,10 @@ export const ContactCTA: React.FC = () => {
           </div>
         </Reveal>
 
-        {/* Contact details — same hairline rows as the rest of the page,
-            re-toned for the dark ground. */}
-        <Reveal className="lg:col-span-3" delay={2}>
-          <div className="flex flex-col">
+        {/* Contact details — rows reveal one after another, so the column
+            reads as a list arriving rather than a single block appearing. */}
+        <div className="flex flex-col lg:col-span-3">
+          <Reveal delay={4}>
             <a
               href="mailto:hello@prayagkansara.design"
               className="group flex items-center gap-3 border-b border-[#3A3735] py-3.5"
@@ -91,7 +95,9 @@ export const ContactCTA: React.FC = () => {
                 hello@prayagkansara.design
               </span>
             </a>
+          </Reveal>
 
+          <Reveal delay={5}>
             <a
               href="https://prayagkansara.design"
               target="_blank"
@@ -103,15 +109,17 @@ export const ContactCTA: React.FC = () => {
                 www.prayagkansara.design
               </span>
             </a>
+          </Reveal>
 
+          <Reveal delay={6}>
             <div className="flex items-center gap-3 py-3.5">
               <MapPin className="h-4 w-4 flex-shrink-0 text-[#B85C3A]" aria-hidden="true" />
               <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#C9C2B7]">
                 Remote Worldwide
               </span>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

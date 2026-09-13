@@ -8,6 +8,11 @@ interface RevealProps {
   delay?: number;
   /** Classes for the wrapper — pass grid placement here, not to the child. */
   className?: string;
+  /**
+   * Element to render. Use "span" (with a `block` class) inside headings —
+   * a div inside an h2 is invalid HTML.
+   */
+  as?: "div" | "span";
 }
 
 /**
@@ -21,8 +26,9 @@ export const Reveal: React.FC<RevealProps> = ({
   children,
   delay = 0,
   className,
+  as: Tag = "div",
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
@@ -60,13 +66,13 @@ export const Reveal: React.FC<RevealProps> = ({
   }, []);
 
   return (
-    <div
-      ref={ref}
+    <Tag
+      ref={ref as React.Ref<HTMLDivElement & HTMLSpanElement>}
       data-reveal={shown ? "in" : "out"}
       style={delay ? { transitionDelay: `${delay * 70}ms` } : undefined}
       className={className}
     >
       {children}
-    </div>
+    </Tag>
   );
 };
