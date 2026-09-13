@@ -54,12 +54,18 @@ export const Hero: React.FC = () => {
             technology.
           </p>
 
-          <span
-            style={delay(540)}
-            className="enter-fade mt-6 block select-none font-signature text-4xl leading-none text-[#171717] sm:text-5xl"
-          >
-            Prayag Kansara
-          </span>
+          {/* Real signature, keyed off the intro video's final frame. alt is
+              empty because the name is already the h2 above — announcing it
+              twice would just be noise for a screen reader. */}
+          <div style={delay(540)} className="enter-fade mt-7">
+            <Image
+              src="/images/signature.webp"
+              alt=""
+              width={900}
+              height={251}
+              className="h-auto w-[200px] select-none sm:w-[240px]"
+            />
+          </div>
         </div>
       </div>
 
