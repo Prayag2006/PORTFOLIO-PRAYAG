@@ -49,15 +49,16 @@ export const Hero: React.FC = () => {
           {/* 3D monolith cluster; falls back to a flat circle on mobile/reduced-motion */}
           <Hero3D />
 
-          {/* User Portrait Container */}
-          <div className="brutal-block relative z-10 w-[260px] h-[340px] sm:w-[340px] sm:h-[440px] md:w-[370px] md:h-[470px] overflow-hidden bg-[#EBE5D8]">
+          {/* Cut-out portrait stands free in front of the sculpture — a hard
+              frame around a transparent figure would read as a mistake. */}
+          <div className="relative z-10 h-[340px] w-[260px] sm:h-[440px] sm:w-[340px] md:h-[480px] md:w-[380px]">
             <Image
-              src="/images/prayag.jpg"
-              alt="Prayag Kansara — Web Designer"
+              src="/images/prayag.webp"
+              alt="Prayag Kansara"
               fill
               priority
-              className="object-cover object-top filter contrast-[1.05]"
-              sizes="(max-width: 768px) 280px, 420px"
+              className="object-contain object-bottom"
+              sizes="(max-width: 640px) 260px, (max-width: 768px) 340px, 380px"
             />
           </div>
 

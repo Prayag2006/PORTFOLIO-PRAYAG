@@ -42,7 +42,17 @@ export const Reveal: React.FC<RevealProps> = ({
         // One-shot. Re-animating every time a section passes is nauseating.
         observer.disconnect();
       },
-      { rootMargin: "0px 0px -12% 0px" },
+      {
+        /*
+         * The top margin extends the observer root far above the viewport, so
+         * anything scrolled past still counts as intersecting. Without it an
+         * element can go from below the fold (ratio 0) to above it (ratio 0)
+         * without ever crossing a threshold — no callback, content stuck
+         * invisible. That happens on a reload with restored scroll, on an
+         * anchor link landing mid-page, and on a fast flick scroll.
+         */
+        rootMargin: "9999px 0px -12% 0px",
+      },
     );
 
     observer.observe(el);

@@ -32,6 +32,15 @@ for (const name of files) {
   const originalSize = (await stat(path)).size;
   const input = await readFile(path);
 
+  // Never run a transparent source through the JPEG encoder — it would
+  // silently flatten the alpha onto black and keep the .png extension.
+  if ((await sharp(input).metadata()).hasAlpha) {
+    console.log(`${name.padEnd(24)} skipped (has transparency)`);
+    before += originalSize;
+    after += originalSize;
+    continue;
+  }
+
   const output = await sharp(input)
     .resize({
       width: MAX_WIDTH[name] ?? DEFAULT_MAX_WIDTH,
