@@ -93,10 +93,8 @@ export const IntroOverlay: React.FC = () => {
         <video
           ref={videoRef}
           src={src}
-          /* contain, not cover: the signature is 16:9 and cover would crop most of
-             it off a portrait phone. The letterbox fills with the overlay colour,
-             which matches the video paper, so the bars are invisible. */
-          className="h-full w-full object-contain"
+          /* object-fit is aspect-dependent — see .intro-video in globals.css. */
+          className="intro-video h-full w-full"
           poster="/video/intro-poster.jpg"
           muted
           playsInline

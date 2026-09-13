@@ -104,6 +104,23 @@ html.intro-pending body {
   overflow: hidden;
 }
 
+/*
+ * The clip is 16:9. Below that ratio "contain" already fills the width and
+ * letterboxes top/bottom, which is what we want — "cover" there would crop the
+ * signature's sides off, badly so on a portrait phone. Only once the viewport
+ * is wider than the clip does "contain" start pillarboxing, and there "cover"
+ * fills the width while the crop eats empty paper above and below the strokes.
+ */
+.intro-video {
+  object-fit: contain;
+}
+
+@media (min-aspect-ratio: 16 / 9) {
+  .intro-video {
+    object-fit: cover;
+  }
+}
+
 .intro-overlay[data-state="closing"] {
   opacity: 0;
   pointer-events: none;
