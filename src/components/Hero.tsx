@@ -63,7 +63,7 @@ export const Hero: React.FC = () => {
               alt=""
               width={900}
               height={251}
-              className="h-auto w-[200px] select-none sm:w-[240px]"
+              className="h-auto w-[300px] select-none sm:w-[360px]"
             />
           </div>
         </div>
