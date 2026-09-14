@@ -16,6 +16,46 @@ interface RevealProps {
 }
 
 /**
+ * Reveals still waiting on their scroll trigger, so that a jump can flush
+ * every one that is already on screen in a single pass.
+ */
+const waiting = new Map<Element, () => void>();
+
+/** Reveals anything currently within the real viewport, band included. */
+const flushOnScreen = () => {
+  for (const [el, show] of waiting) {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) show();
+  }
+};
+
+let lastScrollY = 0;
+
+const onHashChange = () => requestAnimationFrame(flushOnScreen);
+
+const onScroll = () => {
+  const y = window.scrollY;
+  /* Further in one event than any wheel or momentum step — that's a jump. */
+  const jumped = Math.abs(y - lastScrollY) > window.innerHeight;
+  lastScrollY = y;
+  if (jumped) flushOnScreen();
+};
+
+/* Listeners live only while something is still waiting to be revealed. */
+const bindJumpListeners = () => {
+  if (waiting.size !== 1) return;
+  lastScrollY = window.scrollY;
+  window.addEventListener("hashchange", onHashChange);
+  window.addEventListener("scroll", onScroll, { passive: true });
+};
+
+const unbindJumpListeners = () => {
+  if (waiting.size > 0) return;
+  window.removeEventListener("hashchange", onHashChange);
+  window.removeEventListener("scroll", onScroll);
+};
+
+/**
  * Fades and lifts its children in the first time they enter the viewport.
  *
  * Built on IntersectionObserver rather than an animation library: the whole
@@ -41,12 +81,23 @@ export const Reveal: React.FC<RevealProps> = ({
       return;
     }
 
-    const observer = new IntersectionObserver(
+    let observer: IntersectionObserver | null = null;
+
+    const show = () => {
+      setShown(true);
+      waiting.delete(el);
+      unbindJumpListeners();
+      observer?.disconnect();
+    };
+
+    waiting.set(el, show);
+    bindJumpListeners();
+
+    observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
-        setShown(true);
         // One-shot. Re-animating every time a section passes is nauseating.
-        observer.disconnect();
+        show();
       },
       {
         /*
@@ -56,13 +107,28 @@ export const Reveal: React.FC<RevealProps> = ({
          * without ever crossing a threshold — no callback, content stuck
          * invisible. That happens on a reload with restored scroll, on an
          * anchor link landing mid-page, and on a fast flick scroll.
+         *
+         * The bottom margin holds an element back until it is 12% into view,
+         * which reads well while scrolling but strands anything a jump drops
+         * into that band — hence the flush above, not a wider root here.
          */
         rootMargin: "9999px 0px -12% 0px",
       },
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+
+    /*
+     * A deep link scrolls before hydration, so neither a scroll nor a hash
+     * event will ever arrive — flush whatever it landed on.
+     */
+    if (window.location.hash) requestAnimationFrame(flushOnScreen);
+
+    return () => {
+      waiting.delete(el);
+      unbindJumpListeners();
+      observer?.disconnect();
+    };
   }, []);
 
   return (
