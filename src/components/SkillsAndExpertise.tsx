@@ -46,7 +46,7 @@ const featuresList = [
 
 export const SkillsAndExpertise: React.FC = () => {
   return (
-    <section className="w-full border-b border-[#C9C2B7] bg-[#F1EDE3] px-6 py-16 md:px-12 md:py-24 lg:px-16">
+    <section className="w-full border-b border-[#C9C2B7] bg-[#F5F1E8] px-6 py-16 md:px-12 md:py-24 lg:px-16">
       <div className="mx-auto max-w-[1360px]">
         <Reveal>
           <div className="border-b border-[#C9C2B7] pb-10">

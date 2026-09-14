@@ -319,3 +319,24 @@ html.js [data-reveal="out"] {
   color: var(--burnt-orange);
   transform: translateX(4px);
 }
+
+/* Infinite Loop Slider Animation */
+@keyframes infiniteMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: infiniteMarquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+

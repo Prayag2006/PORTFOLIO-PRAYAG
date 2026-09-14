@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
         {/* Right Social Links */}
         <div className="flex items-center gap-6">
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/prayagkansara_05/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[#B85C3A] transition-colors duration-300"
@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
             INSTAGRAM
           </a>
           <a
-            href="https://github.com"
+            href="https://github.com/Prayag2006"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[#B85C3A] transition-colors duration-300"
@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
             GITHUB
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/prayag-kansara-05a2bb214/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[#B85C3A] transition-colors duration-300"

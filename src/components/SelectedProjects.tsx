@@ -15,35 +15,35 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: "studio-form",
+    id: "nz-housing-board",
     number: "01",
-    title: "Studio Form",
-    category: "Architecture Studio",
-    image: "/images/studio-form.jpg",
+    title: "New Zealand Housing Board",
+    category: "Government Housing Website & Portal",
+    image: "/images/nz-housing-board.jpg",
     link: "#",
   },
   {
-    id: "avenue-co",
+    id: "myp-electrical-solutions",
     number: "02",
-    title: "Avenue & Co.",
-    category: "Luxury Fashion Brand",
-    image: "/images/avenue-co.jpg",
+    title: "MYP Electrical Solutions",
+    category: "Website & Database Management System",
+    image: "/images/myp-electrical-solutions.jpg",
     link: "#",
   },
   {
-    id: "the-journal",
+    id: "raj-pvt-ltd",
     number: "03",
-    title: "The Journal",
-    category: "Editorial Platform",
-    image: "/images/the-journal.jpg",
+    title: "RAJ Pvt Ltd",
+    category: "Attendance Management System",
+    image: "/images/raj-pvt-ltd.jpg",
     link: "#",
   },
   {
-    id: "fuel-performance",
+    id: "lolly-shop",
     number: "04",
-    title: "Fuel Performance",
-    category: "Sports Nutrition Brand",
-    image: "/images/fuel-performance.jpg",
+    title: "Lolly Shop Website",
+    category: "E-Commerce Candy & Treats Platform",
+    image: "/images/lolly-shop.jpg",
     link: "#",
   },
 ];
@@ -86,42 +86,65 @@ export const SelectedProjects: React.FC = () => {
 
         {/* Project Grid */}
         <div className="grid grid-cols-1 gap-x-8 gap-y-12 pt-12 sm:grid-cols-2 lg:grid-cols-4">
-          {projects.map((project, index) => (
-            <Reveal key={project.id} delay={index} className="h-full">
-              <a
-                href={project.link}
-                className="project-card group flex h-full flex-col text-left"
-              >
-              {/* Hard-bordered image block with a solid offset that collapses on hover */}
-              <div className="panel panel-hover relative aspect-[4/3] w-full overflow-hidden bg-[#EBE5D8]">
-                <Image
-                  src={project.image}
-                  alt={`${project.title} — ${project.category}`}
-                  fill
-                  className="project-card-image object-cover"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
+          {projects.map((project, index) => {
+            /*
+             * "#" is a placeholder, not a destination. A card pointing at it
+             * reads as a link, takes focus, and then jumps the visitor to the
+             * top of the page — so those render as plain content instead, and
+             * become links again the moment a real URL is filled in.
+             */
+            const href =
+              project.link && project.link !== "#" ? project.link : null;
 
-              {/* Metadata */}
-              <div className="flex items-start gap-3 pt-5">
-                {/* Solid ink index block */}
-                <span className="font-serif text-2xl leading-none text-[#B85C3A]">
-                  {project.number}
-                </span>
-
-                <div className="flex flex-col justify-center">
-                  <h3 className="project-card-title font-sans text-base font-bold leading-tight text-[#171717]">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs font-normal text-[#55504A]">
-                    {project.category}
-                  </p>
+            const card = (
+              <>
+                <div
+                  className={`panel relative aspect-[4/3] w-full overflow-hidden bg-[#EBE5D8]${
+                    href ? " panel-hover" : ""
+                  }`}
+                >
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} — ${project.category}`}
+                    fill
+                    className="project-card-image object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
                 </div>
-              </div>
-              </a>
-            </Reveal>
-          ))}
+
+                {/* Metadata */}
+                <div className="flex items-start gap-3 pt-5">
+                  <span className="font-serif text-2xl leading-none text-[#B85C3A]">
+                    {project.number}
+                  </span>
+
+                  <div className="flex flex-col justify-center">
+                    <h3 className="project-card-title font-sans text-base font-bold leading-tight text-[#171717]">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs font-normal text-[#55504A]">
+                      {project.category}
+                    </p>
+                  </div>
+                </div>
+              </>
+            );
+
+            return (
+              <Reveal key={project.id} delay={index} className="h-full">
+                {href ? (
+                  <a
+                    href={href}
+                    className="project-card group flex h-full flex-col text-left"
+                  >
+                    {card}
+                  </a>
+                ) : (
+                  <div className="flex h-full flex-col text-left">{card}</div>
+                )}
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

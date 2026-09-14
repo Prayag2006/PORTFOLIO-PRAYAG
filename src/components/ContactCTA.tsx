@@ -87,12 +87,12 @@ export const ContactCTA: React.FC = () => {
         <div className="flex flex-col lg:col-span-3">
           <Reveal delay={4}>
             <a
-              href="mailto:hello@prayagkansara.design"
+              href="mailto:prayagkansara05@gmail.com"
               className="group flex items-center gap-3 border-b border-[#3A3735] py-3.5"
             >
               <Mail className="h-4 w-4 flex-shrink-0 text-[#B85C3A]" aria-hidden="true" />
               <span className="font-sans text-sm text-[#F5F1E8] transition-colors duration-300 group-hover:text-[#B85C3A]">
-                hello@prayagkansara.design
+                prayagkansara05@gmail.com
               </span>
             </a>
           </Reveal>

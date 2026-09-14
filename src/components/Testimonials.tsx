@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { MoveRight } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
@@ -8,42 +7,49 @@ interface Testimonial {
   id: string;
   quote: string;
   name: string;
+  /** Organisation only — no invented job titles for real people. */
   role: string;
-  avatar: string;
 }
 
 const testimonials: Testimonial[] = [
   {
-    id: "jessica",
+    id: "ravi",
     quote:
-      "Prayag is an incredible designer. He understood our vision perfectly and delivered a website that exceeded our expectations.",
-    name: "Jessica Lee",
-    role: "Founder, Avenue & Co.",
-    avatar: "/images/jessica.jpg",
+      "Prayag took the time to understand how our programmes actually run before building anything. The platform he delivered is clean and dependable, and he handled our online promotion alongside it.",
+    name: "Ravi Patel",
+    role: "New Zealand Government Programs",
   },
   {
-    id: "david",
+    id: "meghal",
     quote:
-      "Professional, creative, and detail-oriented. The whole process was smooth from start to finish.",
-    name: "David Carter",
-    role: "CEO, Studio Form",
-    avatar: "/images/david.jpg",
+      "Prayag rebuilt our website and ran our social promotion end to end. Clear communication, quick turnaround, and a result that looks the part.",
+    name: "Meghal Patel",
+    role: "MYP Electrical Solutions, New Zealand",
   },
   {
-    id: "james",
+    id: "priyal",
     quote:
-      "Our new website not only looks amazing but also performs exceptionally well. Highly recommended!",
-    name: "James Wilson",
-    role: "Marketing Director, Fuel Performance",
-    avatar: "/images/james.jpg",
+      "Our shop finally looks online the way it feels in store. Prayag built the website and handled the promotions for us, and made the whole process easy.",
+    name: "Priyal Patel",
+    role: "Lolly Shop, New Zealand",
   },
 ];
+
+/** "Ravi Patel" → "RP". Derived, so it cannot drift from the name. */
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
 
 export const Testimonials: React.FC = () => {
   return (
     <section
       id="testimonials"
-      className="w-full border-b border-[#C9C2B7] bg-[#F5F1E8] px-6 py-16 md:px-12 md:py-24 lg:px-16"
+      className="w-full border-b border-[#C9C2B7] bg-[#F1EDE3] px-6 py-16 md:px-12 md:py-24 lg:px-16"
     >
       <div className="mx-auto max-w-[1360px]">
         {/* Section Header Row */}
@@ -93,15 +99,16 @@ export const Testimonials: React.FC = () => {
               </div>
 
               <figcaption className="mt-8 flex items-center gap-3.5 border-t border-[#C9C2B7] pt-5">
-                {/* Square avatar — circles belong to the old editorial pass. */}
-                <div className="relative h-11 w-11 flex-shrink-0 overflow-hidden rounded-full border border-[#C9C2B7]">
-                  <Image
-                    src={t.avatar}
-                    alt={t.name}
-                    fill
-                    className="object-cover"
-                    sizes="44px"
-                  />
+                {/* Monogram rather than a portrait: these are real clients,
+                    and a stock headshot would put a face to a name that is
+                    not theirs. Swap in real photos once they supply them. */}
+                <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-[#C9C2B7] bg-[#F1EDE3]">
+                  <span
+                    aria-hidden="true"
+                    className="font-serif text-sm tracking-wide text-[#171717]"
+                  >
+                    {initials(t.name)}
+                  </span>
                 </div>
 
                 <div className="flex flex-col">

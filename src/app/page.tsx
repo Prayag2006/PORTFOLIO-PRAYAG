@@ -2,7 +2,9 @@ import { Header } from "@/components/Header";
 import { VerticalSideLabels } from "@/components/VerticalSideLabels";
 import { Hero } from "@/components/Hero";
 import { SelectedProjects } from "@/components/SelectedProjects";
+import { Experience } from "@/components/Experience";
 import { SkillsAndExpertise } from "@/components/SkillsAndExpertise";
+import { Certifications } from "@/components/Certifications";
 import { Testimonials } from "@/components/Testimonials";
 import { ContactCTA } from "@/components/ContactCTA";
 import { Footer } from "@/components/Footer";
@@ -17,7 +19,9 @@ export default function Home() {
       <Header />
       <Hero />
       <SelectedProjects />
+      <Experience />
       <SkillsAndExpertise />
+      <Certifications />
       <Testimonials />
       <ContactCTA />
       <Footer />
